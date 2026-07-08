@@ -1,0 +1,49 @@
+.cs-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 900px;
+  overflow: visible;
+}
+
+.cs-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 18px;
+  border: 1px solid rgba(230,243,239,0.12);
+  background: #210124;
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px 28px 24px;
+  gap: 10px;
+}
+
+/* Subtle inner glow */
+.cs-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 30% 30%, rgba(117,13,55,0.18), transparent 65%);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .cs-container {
+    transform: scale(0.72) translate(25%, 25%);
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-container {
+    transform: scale(0.52) translate(25%, 25%);
+  }
+}
