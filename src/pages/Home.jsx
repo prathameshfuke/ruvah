@@ -542,17 +542,19 @@ function Services() {
   return (
     <section id="services" style={{ background: C.mint, padding: "140px 56px" }}>
       <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
-        <Eyebrow>What We Do</Eyebrow>
-        <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
-          fontSize: "clamp(32px,4.5vw,56px)", fontWeight: 700, color: C.plum,
-          letterSpacing: "-0.025em", lineHeight: 1.1, margin: "0 0 64px", maxWidth: "480px" }}>
-          <BlurText text="Three ways we grow your business." delay={80} animateBy="words" direction="top" />
-        </h2>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+          <Eyebrow>What We Do</Eyebrow>
+          <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
+            fontSize: "clamp(32px,4.5vw,56px)", fontWeight: 700, color: C.plum,
+            letterSpacing: "-0.025em", lineHeight: 1.1, margin: "0 auto 64px", maxWidth: "480px" }}>
+            <BlurText text="Three ways we grow your business." delay={80} animateBy="words" direction="top" />
+          </h2>
+        </div>
 
         {/* ── Three clickable folders — one per service pillar ── */}
         <Reveal delay={0.1}>
-          <div style={{ display: "flex", gap: "56px", justifyContent: "center",
-            alignItems: "flex-end", margin: "0 0 80px", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "90px", justifyContent: "center",
+            alignItems: "flex-end", margin: "100px 0 80px", flexWrap: "wrap" }}>
             <Folder
               color={C.burgundy}
               size={1.5}
@@ -560,11 +562,17 @@ function Services() {
               sublabel="Visual identity"
               items={[
                 <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
-                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4 }}>
-                  Logo · System · Print
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  Logo · System
                 </span>,
-                null,
-                null
+                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  Print · Pkg
+                </span>,
+                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  Brand Book
+                </span>
               ]}
             />
             <Folder
@@ -574,11 +582,17 @@ function Services() {
               sublabel="Web presence"
               items={[
                 <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
-                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4 }}>
-                  Web · UI · SEO
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  Web · UI
                 </span>,
-                null,
-                null
+                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  SEO · Data
+                </span>,
+                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  Social
+                </span>
               ]}
             />
             <Folder
@@ -588,11 +602,17 @@ function Services() {
               sublabel="AI & automation"
               items={[
                 <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
-                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4 }}>
-                  AI · Dev · CRM
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  AI · Dev
                 </span>,
-                null,
-                null
+                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  CRM · Ops
+                </span>,
+                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                  color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
+                  Booking
+                </span>
               ]}
             />
           </div>

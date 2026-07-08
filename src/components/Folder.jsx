@@ -17,6 +17,7 @@ const Folder = ({ color = '#750D37', size = 1, items = [], className = '', label
   while (papers.length < maxItems) papers.push(null);
 
   const [open, setOpen] = useState(false);
+  const [topPaper, setTopPaper] = useState(2);
   const [paperOffsets, setPaperOffsets] = useState(
     Array.from({ length: maxItems }, () => ({ x: 0, y: 0 }))
   );
@@ -28,7 +29,18 @@ const Folder = ({ color = '#750D37', size = 1, items = [], className = '', label
 
   const handleClick = () => {
     setOpen(prev => !prev);
-    if (open) setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+    if (open) {
+      setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+      // Reset top paper to the last one when closing
+      setTopPaper(2);
+    }
+  };
+
+  const handlePaperClick = (e, index) => {
+    if (open) {
+      e.stopPropagation();
+      setTopPaper(index);
+    }
   };
 
   const handlePaperMouseMove = (e, index) => {
@@ -52,7 +64,10 @@ const Folder = ({ color = '#750D37', size = 1, items = [], className = '', label
   };
 
   return (
-    <div className={`folder-wrapper ${className}`} style={{ transform: `scale(${size})` }}>
+    <div className={`folder-wrapper ${className}`} style={{ 
+      transform: `scale(${size})`, 
+      margin: `0 ${(size - 1) * 50}px` 
+    }}>
       <div
         className={`folder ${open ? 'open' : ''}`}
         style={{ '--folder-color': color, '--folder-back-color': folderBackColor,
@@ -69,9 +84,14 @@ const Folder = ({ color = '#750D37', size = 1, items = [], className = '', label
             <div
               key={i}
               className={`paper paper-${i + 1}`}
+              onClick={e => handlePaperClick(e, i)}
               onMouseMove={e => handlePaperMouseMove(e, i)}
               onMouseLeave={e => handlePaperMouseLeave(e, i)}
-              style={open ? { '--magnet-x': `${paperOffsets[i]?.x || 0}px`, '--magnet-y': `${paperOffsets[i]?.y || 0}px` } : {}}
+              style={open ? { 
+                '--magnet-x': `${paperOffsets[i]?.x || 0}px`, 
+                '--magnet-y': `${paperOffsets[i]?.y || 0}px`,
+                zIndex: topPaper === i ? 20 : 10 + i
+              } : { zIndex: topPaper === i ? 20 : 10 + i }}
             >
               {item}
             </div>

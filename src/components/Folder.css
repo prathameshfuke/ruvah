@@ -33,26 +33,26 @@
 }
 
 .folder.open .paper:nth-child(1) {
-  transform: translate(-120%, -72%) rotateZ(-15deg);
+  transform: translate(-90%, -70%) rotateZ(-10deg);
 }
 .folder.open .paper:nth-child(1):hover {
-  transform: translate(calc(-120% + var(--magnet-x, 0px)), calc(-72% + var(--magnet-y, 0px))) rotateZ(-15deg) scale(1.08);
+  transform: translate(calc(-90% + var(--magnet-x, 0px)), calc(-70% + var(--magnet-y, 0px))) rotateZ(-10deg) scale(1.08);
 }
 
 .folder.open .paper:nth-child(2) {
-  transform: translate(12%, -72%) rotateZ(15deg);
+  transform: translate(-50%, -85%) rotateZ(0deg);
   height: 80%;
 }
 .folder.open .paper:nth-child(2):hover {
-  transform: translate(calc(12% + var(--magnet-x, 0px)), calc(-72% + var(--magnet-y, 0px))) rotateZ(15deg) scale(1.08);
+  transform: translate(calc(-50% + var(--magnet-x, 0px)), calc(-85% + var(--magnet-y, 0px))) rotateZ(0deg) scale(1.08);
 }
 
 .folder.open .paper:nth-child(3) {
-  transform: translate(-50%, -105%) rotateZ(4deg);
+  transform: translate(-10%, -70%) rotateZ(10deg);
   height: 80%;
 }
 .folder.open .paper:nth-child(3):hover {
-  transform: translate(calc(-50% + var(--magnet-x, 0px)), calc(-105% + var(--magnet-y, 0px))) rotateZ(4deg) scale(1.08);
+  transform: translate(calc(-10% + var(--magnet-x, 0px)), calc(-70% + var(--magnet-y, 0px))) rotateZ(10deg) scale(1.08);
 }
 
 .folder.open .folder__front {
@@ -84,7 +84,7 @@
 
 .paper {
   position: absolute;
-  z-index: 2;
+  z-index: 10;
   bottom: 10%;
   left: 50%;
   transform: translate(-50%, 10%);
@@ -113,7 +113,7 @@
 
 .folder__front {
   position: absolute;
-  z-index: 3;
+  z-index: 30;
   width: 100%;
   height: 100%;
   background: var(--folder-color);
