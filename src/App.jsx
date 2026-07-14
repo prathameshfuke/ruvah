@@ -59,6 +59,21 @@ function AppShell() {
 function App() {
   const [introFinished, setIntroFinished] = useState(false)
 
+  // Lock scroll while intro is playing so the hidden page
+  // content cannot be scrolled (which would cause a jump when
+  // the intro fades out and the page becomes visible).
+  useEffect(() => {
+    if (!introFinished) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Snap to top BEFORE the fade-in starts so the user
+      // always sees the hero, never the bottom of the page.
+      window.scrollTo({ top: 0, behavior: 'instant' })
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [introFinished])
+
   return (
     <Router>
       {/* Cinema intro overlay */}

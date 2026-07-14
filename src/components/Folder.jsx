@@ -65,8 +65,7 @@ const Folder = ({ color = '#750D37', size = 1, items = [], className = '', label
 
   return (
     <div className={`folder-wrapper ${className}`} style={{ 
-      transform: `scale(${size})`, 
-      margin: `0 ${(size - 1) * 50}px` 
+      '--folder-scale': size,
     }}>
       <div
         className={`folder ${open ? 'open' : ''}`}

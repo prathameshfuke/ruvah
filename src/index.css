@@ -38,6 +38,7 @@ body {
   color: var(--color-plum);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1,
@@ -814,6 +815,61 @@ a {
 
   .site-footer__nav {
     justify-content: flex-start;
+  }
+
+  /* Buttons: ensure they don't overflow */
+  .btn {
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Process item columns on very small screens */
+  .process-item {
+    grid-template-columns: 52px 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: min(100% - 1.2rem, var(--container-max));
+  }
+
+  .section-block {
+    padding: 3.6rem 0;
+  }
+
+  /* Ensure no element exceeds viewport */
+  img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Navbar */
+  .site-navbar__inner {
+    min-height: 64px;
+    padding: 0.6rem 0;
+  }
+
+  /* Typography scale-down */
+  .display {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .lead {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+  }
+
+  /* Cards full width */
+  .grid--two,
+  .grid--three {
+    grid-template-columns: 1fr;
+  }
+
+  /* Process item */
+  .process-item {
+    grid-template-columns: 48px 1fr;
+    gap: 0.6rem;
   }
 }
 

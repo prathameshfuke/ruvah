@@ -1,0 +1,197 @@
+/* ═══════════════════════════════════════════════════════════════
+   Home.mobile.css — Responsive overrides for Home.jsx
+   Breakpoints:
+     768px  — tablet portrait & small laptop
+     480px  — mobile landscape
+     400px  — small phone
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Shared section padding override ─────────────────────── */
+@media (max-width: 768px) {
+  .home-section {
+    padding: 80px 24px !important;
+  }
+
+  .home-contact-section {
+    padding: 80px 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-section {
+    padding: 64px 20px !important;
+  }
+
+  .home-contact-section {
+    padding: 64px 20px !important;
+  }
+}
+
+/* ─── Navbar ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-nav {
+    padding: 14px 20px !important;
+    position: fixed !important;
+  }
+
+  /* Hide desktop nav links on mobile */
+  .home-nav__links {
+    display: none !important;
+  }
+
+  /* Show hamburger on mobile */
+  .home-nav__hamburger {
+    display: flex !important;
+  }
+}
+
+/* ─── Hero Section ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-hero-section {
+    grid-template-columns: 1fr !important;
+    padding: 0 24px 48px !important;
+    padding-top: 100px !important;
+    gap: 48px !important;
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-hero-section {
+    padding: 0 20px 40px !important;
+    padding-top: 90px !important;
+    gap: 36px !important;
+  }
+}
+
+/* Hide the CardSwap deck on small screens */
+@media (max-width: 768px) {
+  .home-hero__card-wrap {
+    height: 280px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-hero__card-wrap {
+    display: none !important;
+  }
+}
+
+/* Hero CTA buttons: stack vertically on tiny screens */
+@media (max-width: 400px) {
+  .home-hero__cta-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .home-hero__cta-row a {
+    text-align: center;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+}
+
+/* ─── About Section ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-about__grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+
+/* ─── Services Section ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-services-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Folders: single centered column */
+  .home-folders-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+    margin: 40px 0 32px !important;
+  }
+
+  .home-services-cta {
+    padding: 32px 24px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-folders-row {
+    gap: 16px !important;
+    margin: 28px 0 20px !important;
+  }
+}
+
+/* ─── Founders Section ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Let the height auto-fit the stacked cards instead of fixed px */
+  .home-founders-chroma {
+    height: auto !important;
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-founders-chroma {
+    height: auto !important;
+    min-height: 360px;
+  }
+}
+
+/* ─── Contact Section ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-contact__cta-row {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .home-contact__cta-row a {
+    width: 100% !important;
+    max-width: 340px;
+    justify-content: center !important;
+    text-align: center;
+    /* Fix email overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .home-contact__cta-row a {
+    max-width: 100%;
+    font-size: 11px !important;
+  }
+}
+
+/* ─── Footer ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-footer {
+    padding: 24px 20px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+  }
+
+  .home-footer__links {
+    gap: 16px 20px !important;
+  }
+}
+
+/* ─── Btn component inside contact — prevent overflow ─────── */
+@media (max-width: 480px) {
+  /* The ghost "email" button wraps text properly */
+  .home-contact__cta-row a[href^="mailto"] {
+    word-break: break-all;
+    white-space: normal !important;
+    text-align: center;
+    line-height: 1.4;
+  }
+}

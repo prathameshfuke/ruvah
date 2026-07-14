@@ -25,11 +25,36 @@
   }
 }
 
+@media (max-width: 768px) {
+  .chroma-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    max-width: 100%;
+  }
+
+  .chroma-card {
+    width: 100%;
+  }
+
+  .chroma-img-wrapper img {
+    height: 200px;
+  }
+}
+
 @media (max-width: 480px) {
   .chroma-grid {
-    grid-template-columns: 300px;
+    grid-template-columns: 1fr;
     gap: 0.75rem;
-    padding: 1rem;
+    padding: 1rem 0;
+  }
+
+  .chroma-card {
+    width: 100%;
+  }
+
+  .chroma-img-wrapper img {
+    height: 180px;
   }
 }
 

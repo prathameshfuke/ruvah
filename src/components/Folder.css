@@ -4,6 +4,23 @@
   align-items: center;
   gap: 18px;
   transform-origin: bottom center;
+  transform: scale(var(--folder-scale, 1));
+  margin: 0 calc((var(--folder-scale, 1) - 1) * 50px);
+}
+
+/* Mobile: reset scale so folders don't overflow */
+@media (max-width: 768px) {
+  .folder-wrapper {
+    --folder-scale: 1.1 !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .folder-wrapper {
+    --folder-scale: 1 !important;
+    margin: 0 !important;
+  }
 }
 
 .folder {

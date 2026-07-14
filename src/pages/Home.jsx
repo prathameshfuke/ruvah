@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
   useSpring,
@@ -11,6 +12,7 @@ import Threads from "../components/Threads";
 import ChromaGrid from "../components/ChromaGrid";
 import CardSwap, { Card } from "../components/CardSwap";
 import Folder from "../components/Folder";
+import "./Home.mobile.css";
 
 /* ─── Design tokens ─────────────────────────────────────── */
 const C = {
@@ -138,6 +140,7 @@ function Eyebrow({ children, color = C.burgundy }) {
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const fn = () => {
@@ -157,21 +160,26 @@ function Nav() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  // Close mobile menu on link click
+  const handleNavClick = () => setMobileOpen(false);
+
   return (
     <motion.nav
+      className="home-nav"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
       style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         padding: "16px 48px", display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: scrolled ? (dark ? "rgba(33,1,36,0.92)" : "rgba(230,243,239,0.92)") : "transparent",
-        backdropFilter: scrolled ? "blur(24px)" : "none",
+        background: scrolled ? (dark ? "rgba(33,1,36,0.92)" : "rgba(230,243,239,0.92)") : (mobileOpen ? (dark ? "rgba(33,1,36,0.97)" : "rgba(230,243,239,0.97)") : "transparent"),
+        backdropFilter: (scrolled || mobileOpen) ? "blur(24px)" : "none",
         borderBottom: scrolled ? `1px solid rgba(117,13,55,${dark ? "0.18" : "0.07"})` : "none",
         transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease",
+        flexWrap: "wrap",
       }}
     >
-      {/* Logo — swap to bg-less version on dark (plum) sections */}
+      {/* Logo */}
       <img
         src="/assets/ruvah_without_bg.png"
         alt="Ruvah"
@@ -179,10 +187,12 @@ function Nav() {
           height: "32px",
           objectFit: "contain",
           transition: "opacity 0.4s ease",
+          zIndex: 101,
         }}
       />
 
-      <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
+      {/* Desktop nav links */}
+      <div className="home-nav__links" style={{ display: "flex", gap: "32px", alignItems: "center" }}>
         {["About", "Services", "Process", "Founders", "Contact"].map((l) => (
           <motion.a
             key={l}
@@ -197,6 +207,74 @@ function Nav() {
         ))}
         <Btn href="mailto:ruvah.work@outlook.com">Book a Call</Btn>
       </div>
+
+      {/* Hamburger button — mobile only */}
+      <button
+        className="home-nav__hamburger"
+        onClick={() => setMobileOpen((o) => !o)}
+        aria-label="Toggle menu"
+        style={{
+          display: "none",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          padding: "6px",
+          zIndex: 101,
+          flexDirection: "column",
+          gap: "5px",
+        }}
+      >
+        <span style={{ display: "block", width: "22px", height: "2px",
+          background: dark ? C.mint : C.plum,
+          transition: "transform 0.3s ease, opacity 0.3s ease",
+          transform: mobileOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
+        <span style={{ display: "block", width: "22px", height: "2px",
+          background: dark ? C.mint : C.plum,
+          transition: "opacity 0.3s ease",
+          opacity: mobileOpen ? 0 : 1 }} />
+        <span style={{ display: "block", width: "22px", height: "2px",
+          background: dark ? C.mint : C.plum,
+          transition: "transform 0.3s ease, opacity 0.3s ease",
+          transform: mobileOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
+      </button>
+
+      {/* Mobile dropdown menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            className="home-nav__mobile-menu"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            style={{
+              position: "absolute", top: "100%", left: 0, right: 0,
+              background: dark ? "rgba(33,1,36,0.97)" : "rgba(230,243,239,0.97)",
+              backdropFilter: "blur(24px)",
+              borderBottom: `1px solid rgba(117,13,55,0.12)`,
+              padding: "16px 24px 24px",
+              display: "flex", flexDirection: "column", gap: "0",
+            }}
+          >
+            {["About", "Services", "Process", "Founders", "Contact"].map((l) => (
+              <a
+                key={l}
+                href={`#${l.toLowerCase()}`}
+                onClick={handleNavClick}
+                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", fontWeight: 500,
+                  color: dark ? "rgba(230,243,239,0.82)" : "rgba(33,1,36,0.72)",
+                  textDecoration: "none", padding: "14px 0",
+                  borderBottom: `1px solid rgba(117,13,55,0.08)` }}
+              >
+                {l}
+              </a>
+            ))}
+            <div style={{ marginTop: "20px" }}>
+              <Btn href="mailto:ruvah.work@outlook.com" style={{ width: "100%", justifyContent: "center" }}>Book a Call</Btn>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
@@ -234,6 +312,7 @@ function Hero() {
   return (
     <section
       id="hero-section"
+      className="home-hero-section"
       ref={ref}
       style={{ minHeight: "100vh", background: C.mint, position: "relative", overflow: "hidden",
         display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "center",
@@ -252,7 +331,7 @@ function Hero() {
       </motion.div>
 
       {/* Left: text content */}
-      <motion.div style={{ y: contentY, position: "relative", zIndex: 1 }}>
+      <motion.div className="home-hero__text" style={{ y: contentY, position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -304,6 +383,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
+          className="home-hero__cta-row"
           style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
         >
           <Btn href="mailto:ruvah.work@outlook.com">Book a Discovery Call</Btn>
@@ -312,7 +392,7 @@ function Hero() {
       </motion.div>
 
       {/* Right: CardSwap service deck */}
-      <div style={{ position: "relative", height: "460px", zIndex: 1 }}>
+      <div className="home-hero__card-wrap" style={{ position: "relative", height: "460px", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, x: 48 }}
           animate={{ opacity: 1, x: 0 }}
@@ -383,7 +463,7 @@ function Problem() {
   ];
 
   return (
-    <section id="problem" style={{ background: C.plum, padding: "140px 56px" }}>
+    <section id="problem" className="home-section" style={{ background: C.plum, padding: "140px 56px" }}>
       <div style={{ maxWidth: "880px", margin: "0 auto" }}>
         <Eyebrow color={C.sage}>The Problem</Eyebrow>
 
@@ -430,8 +510,8 @@ function Problem() {
 /* ─── About ───────────────────────────────────────────────── */
 function About() {
   return (
-    <section id="about" style={{ background: C.mint, padding: "140px 56px" }}>
-      <div style={{ maxWidth: "1080px", margin: "0 auto", display: "grid",
+    <section id="about" className="home-section" style={{ background: C.mint, padding: "140px 56px" }}>
+      <div className="home-about__grid" style={{ maxWidth: "1080px", margin: "0 auto", display: "grid",
         gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
         <div>
           <Eyebrow>Who We Are</Eyebrow>
@@ -540,7 +620,7 @@ function SvcCard({ s, i }) {
 
 function Services() {
   return (
-    <section id="services" style={{ background: C.mint, padding: "140px 56px" }}>
+    <section id="services" className="home-section" style={{ background: C.mint, padding: "140px 56px" }}>
       <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
           <Eyebrow>What We Do</Eyebrow>
@@ -553,7 +633,7 @@ function Services() {
 
         {/* ── Three clickable folders — one per service pillar ── */}
         <Reveal delay={0.1}>
-          <div style={{ display: "flex", gap: "90px", justifyContent: "center",
+          <div className="home-folders-row" style={{ display: "flex", gap: "90px", justifyContent: "center",
             alignItems: "flex-end", margin: "100px 0 80px", flexWrap: "wrap" }}>
             <Folder
               color={C.burgundy}
@@ -618,7 +698,7 @@ function Services() {
           </div>
         </Reveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "12px" }}>
+        <div className="home-services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "12px" }}>
           {SVCS.map((s, i) => <SvcCard key={i} s={s} i={i} />)}
         </div>
 
@@ -626,6 +706,7 @@ function Services() {
           <motion.div
             whileHover={{ scale: 1.015 }}
             transition={{ type: "spring", stiffness: 180, damping: 22 }}
+            className="home-services-cta"
             style={{ marginTop: "72px", padding: "48px 52px", background: C.plum,
               borderRadius: "16px", display: "flex", alignItems: "center",
               justifyContent: "space-between", gap: "36px", flexWrap: "wrap" }}
@@ -685,7 +766,7 @@ function StepItem({ step, i }) {
 
 function Process() {
   return (
-    <section id="process" style={{ background: C.plum, padding: "140px 56px" }}>
+    <section id="process" className="home-section" style={{ background: C.plum, padding: "140px 56px" }}>
       <div style={{ maxWidth: "680px", margin: "0 auto", position: "relative" }}>
         <Eyebrow color={C.sage}>How It Works</Eyebrow>
         <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
@@ -725,7 +806,7 @@ const FOUNDER_ITEMS = [
 
 function Founders() {
   return (
-    <section id="founders" style={{ background: C.mint, padding: "140px 56px" }}>
+    <section id="founders" className="home-section" style={{ background: C.mint, padding: "140px 56px" }}>
       <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
         <Eyebrow>The Two Founders</Eyebrow>
         <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
@@ -739,7 +820,7 @@ function Founders() {
 
         {/* ChromaGrid */}
         <Reveal delay={0.1}>
-          <div style={{ height: "520px", position: "relative" }}>
+          <div className="home-founders-chroma" style={{ height: "520px", position: "relative" }}>
             <ChromaGrid
               items={FOUNDER_ITEMS}
               columns={2}
@@ -770,6 +851,7 @@ function Contact() {
 
   return (
     <section id="contact" ref={ref}
+      className="home-section home-contact-section"
       style={{ background: C.plum, padding: "160px 56px", textAlign: "center",
         position: "relative", overflow: "hidden" }}>
       {/* Parallax glow */}
@@ -813,7 +895,7 @@ function Contact() {
         </Reveal>
 
         <Reveal delay={0.42}>
-          <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginBottom: "32px" }}>
+          <div className="home-contact__cta-row" style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginBottom: "32px" }}>
             <Btn href="mailto:ruvah.work@outlook.com">Book a Discovery Call</Btn>
             <Btn variant="ghost" href="mailto:ruvah.work@outlook.com">ruvah.work@outlook.com</Btn>
           </div>
@@ -830,12 +912,12 @@ function Contact() {
 /* ─── Footer ──────────────────────────────────────────────── */
 function SiteFooter() {
   return (
-    <footer style={{ background: C.plum, borderTop: "1px solid rgba(230,243,239,0.05)",
+    <footer className="home-footer" style={{ background: C.plum, borderTop: "1px solid rgba(230,243,239,0.05)",
       padding: "28px 56px", display: "flex", alignItems: "center",
       justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
       <img src="/assets/ruvah_without_bg.png" alt="Ruvah"
         style={{ height: "26px", objectFit: "contain", opacity: 0.28 }} />
-      <div style={{ display: "flex", gap: "24px" }}>
+      <div className="home-footer__links" style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
         {["About", "Services", "Process", "Founders", "Contact"].map((l) => (
           <motion.a
             key={l}
