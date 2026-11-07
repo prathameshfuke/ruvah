@@ -21,23 +21,28 @@ const workModels = [
     title: 'Full Studio — Brand + Digital + Tech',
     tag: 'Our Best Work',
     emphasis: true,
+    description:
+      'Everything built together — identity, website, and intelligent systems that all speak the same language. This is where RUVAH shines.',
     chips: [
       'Brand Identity',
-      'AI automation',
-      'Social design',
       'UI/UX',
+      'AI automation',
       'Booking systems',
+      'Social design',
       'Website development',
-      'Analytics stack',
     ],
   },
   {
     title: 'Design Only — Just the Creative Side',
-    chips: ['Brand identity', 'Packaging', 'Publication', 'UI/UX', 'Website design', 'Social templates'],
+    description:
+      'You need brand, design, and digital communication — without the tech systems. We handle everything visual, beautifully and completely.',
+    chips: ['Brand identity', 'Logo', 'Packaging', 'Publication', 'UI/UX', 'Social templates'],
   },
   {
     title: 'Tech Only — Just the Intelligent Side',
-    chips: ['Full-stack development', 'AI engineering', 'Automation systems', 'CRM integrations', 'Architecture'],
+    description:
+      'You already have a brand. You need tech — AI tools, automation, a website, or a system built for scale. We build it precisely.',
+    chips: ['CRM & booking', 'AI integration', 'Automation', 'ML solutions', 'Full-stack dev'],
   },
 ]
 
@@ -88,6 +93,7 @@ function Services() {
                 >
                   {model.tag ? <span className="ribbon">{model.tag}</span> : null}
                   <h3>{model.title}</h3>
+                  {model.description && <p style={{ fontSize: '0.9rem', margin: '0.6rem 0 1rem', opacity: 0.75, lineHeight: 1.6 }}>{model.description}</p>}
                   <div className="pill-wrap">
                     {model.chips.map((chip) => (
                       <span key={`${chip}-${index}`} className="pill">

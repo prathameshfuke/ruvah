@@ -99,6 +99,13 @@
   }
 }
 
+/* ─── Vision / Mission / Values Section ────────────────────── */
+@media (max-width: 768px) {
+  .home-vmv-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* ─── Services Section ─────────────────────────────────────── */
 @media (max-width: 768px) {
   .home-services-grid {
@@ -128,12 +135,30 @@
   }
 }
 
+/* ─── Work Models Section ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-work-models-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Who We Work With Section ─────────────────────────────── */
+@media (max-width: 768px) {
+  .home-who-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* ─── Founders Section ─────────────────────────────────────── */
 @media (max-width: 768px) {
   /* Let the height auto-fit the stacked cards instead of fixed px */
   .home-founders-chroma {
     height: auto !important;
     min-height: 420px;
+  }
+
+  .home-founders-desc-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { revealContainer, revealItem, inViewViewport } from '../utils/motion'
 
 const values = [
-  'Design and technology are planned together from day one.',
-  'Every output must be useful, measurable, and business-led.',
-  'Partnership over handoff — we stay accountable after launch.',
+  'Craft over quantity — we say no to average work.',
+  'Intelligence by design — tech and aesthetics are inseparable.',
+  'Partnership mindset — we grow when clients grow.',
 ]
 
 function About() {
@@ -28,8 +28,8 @@ function About() {
             <motion.aside className="callout callout--sage" variants={revealItem}>
               <h2>The Name</h2>
               <p>
-                Ruvah comes from Hebrew roots that evoke breath, spirit, and an invisible force that moves things.
-                That idea shapes our work: quiet precision, strong momentum, one continuous output.
+                Ruvah comes from Hebrew roots meaning breath, spirit, and an invisible force that moves things forward.
+                That idea shapes our work: quiet precision, strong momentum, one continuous output. That&apos;s what we are for your brand.
               </p>
             </motion.aside>
           </motion.div>
@@ -42,19 +42,19 @@ function About() {
             <motion.article className="card card--lavender" variants={revealItem}>
               <h3>VISION</h3>
               <p>
-                To become the trusted growth studio for modern businesses that need brand and technology moving in the
-                same direction.
+                To become the most trusted creative-tech studio for growth-stage businesses in India, where every brand
+                we touch becomes impossible to ignore.
               </p>
             </motion.article>
             <motion.article className="card card--lavender" variants={revealItem}>
               <h3>MISSION</h3>
               <p>
-                To deliver integrated creative-tech systems that help clients attract better leads, operate smoothly,
-                and scale with clarity.
+                We help ambitious businesses grow by combining purposeful design with intelligent technology delivering
+                brand identity, digital presence, and smart systems under one roof.
               </p>
             </motion.article>
             <motion.article className="card card--lavender" variants={revealItem}>
-              <h3>VALUE</h3>
+              <h3>VALUES</h3>
               <ul className="list">
                 {values.map((value) => (
                   <li key={value}>{value}</li>
@@ -75,12 +75,12 @@ function About() {
               <motion.article className="card card--lilac founder-strip-card" variants={revealItem}>
                 <img src="/assets/kashish.png" alt="Kashish Oswal" />
                 <p className="role">Design Partner</p>
-                <p>Brand systems and visual direction built to communicate clearly and convert consistently.</p>
+                <p>Brand identity, packaging, UI/UX, publication, social media, menus, brochures, website design. Everything visual, built with purpose.</p>
               </motion.article>
               <motion.article className="card card--lilac founder-strip-card" variants={revealItem}>
                 <img src="/assets/prathamesh.png" alt="Prathamesh Fuke" />
                 <p className="role">Tech Partner</p>
-                <p>AI and engineering systems built for dependable operations, scale, and measurable outcomes.</p>
+                <p>AI engineering, machine learning, full-stack development, software architecture, automation systems, booking & CRM integrations. Everything intelligent, built to scale.</p>
               </motion.article>
             </motion.div>
             <motion.p className="founder-link-wrap" variants={revealItem}>

@@ -3,10 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import LiquidEther from "./LiquidEther";
 
 const VIDEO_PATH = "/assets/WhatsApp Video 2026-07-08 at 1.13.42 PM.mp4";
-const AUTO_SKIP_MS = 14000;
+const AUTO_SKIP_MS = 5000; // Reduced from 14s to 5s for faster load
+const MOBILE_BREAKPOINT = 768;
 
 export default function VideoIntro({ onFinished }) {
-  const [visible, setVisible] = useState(true);
+  // Skip intro entirely on mobile — target clients find Ruvah via Instagram
+  // on their phones, so content must appear immediately without waiting.
+  const isMobile =
+    typeof window !== "undefined" && window.innerWidth <= MOBILE_BREAKPOINT;
+
+  const [visible, setVisible] = useState(() => !isMobile);
   const [fadeOut, setFadeOut] = useState(false);
   const videoRef = useRef(null);
   const timerRef = useRef(null);
@@ -18,11 +24,15 @@ export default function VideoIntro({ onFinished }) {
   };
 
   useEffect(() => {
+    if (isMobile) {
+      onFinished?.();
+      return;
+    }
     timerRef.current = setTimeout(dismiss, AUTO_SKIP_MS);
     return () => clearTimeout(timerRef.current);
-  }, []);
+  }, [isMobile]);
 
-  if (!visible) return null;
+  if (isMobile || !visible) return null;
 
   return (
     <AnimatePresence>
@@ -95,11 +105,11 @@ export default function VideoIntro({ onFinished }) {
             }} />
           </motion.div>
 
-          {/* Skip */}
+          {/* Skip — shows immediately (delay: 0) instead of waiting 1.4s */}
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.4, duration: 0.6 }}
+            transition={{ delay: 0, duration: 0.4 }}
             onClick={dismiss}
             style={{
               background: "rgba(255,255,255,0.06)",

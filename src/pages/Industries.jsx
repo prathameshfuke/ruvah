@@ -37,9 +37,8 @@ function Industries() {
             <motion.article className="fit-block" variants={revealItem}>
               <h2>You&apos;re a fit if</h2>
               <p>
-                You&apos;re a business owner or team that wants identity, digital execution, and operational tech to
-                move together. You value speed with depth, clear communication, and a studio that stays close beyond
-                delivery.
+                You&apos;re tired of looking smaller than you are. You want brand, website, and tech — but you don&apos;t
+                want to manage three different vendors. You&apos;re ready to invest in building something that lasts.
               </p>
             </motion.article>
           </motion.div>

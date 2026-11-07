@@ -57,7 +57,9 @@ function AppShell() {
 }
 
 function App() {
-  const [introFinished, setIntroFinished] = useState(false)
+  const [introFinished, setIntroFinished] = useState(() => {
+    return typeof window !== 'undefined' && window.innerWidth <= 768
+  })
 
   // Lock scroll while intro is playing so the hidden page
   // content cannot be scrolled (which would cause a jump when
@@ -76,18 +78,18 @@ function App() {
 
   return (
     <Router>
-      {/* Cinema intro overlay */}
+      {/* Cinema intro overlay (skipped completely on mobile) */}
       <VideoIntro onFinished={() => setIntroFinished(true)} />
 
       {/*
         Main content sits beneath the intro.
-        It starts invisible and fades in exactly as the intro's
-        black overlay fades out — creating a smooth crossfade.
+        It starts invisible on desktop and fades in when the intro ends.
+        On mobile, introFinished is true initially so content appears immediately.
       */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={{ opacity: introFinished ? 1 : 0 }}
         animate={{ opacity: introFinished ? 1 : 0 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         style={{ willChange: 'opacity' }}
       >
         <AppShell />

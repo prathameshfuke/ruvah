@@ -155,4 +155,13 @@
   grid-column: 1;
 }
 
+.chroma-info .desc {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 0.5rem;
+  font-weight: 300;
+}
+
 /* Removed chroma-overlay and chroma-fade as requested to remove the dark box background */

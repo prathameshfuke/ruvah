@@ -12,18 +12,22 @@ import Threads from "../components/Threads";
 import ChromaGrid from "../components/ChromaGrid";
 import CardSwap, { Card } from "../components/CardSwap";
 import Folder from "../components/Folder";
+import { FaCheck } from "react-icons/fa6";
 import "./Home.mobile.css";
 
-/* ─── Design tokens ─────────────────────────────────────── */
+/* ─── Design tokens (updated to match deck's exact codes) ── */
 const C = {
   burgundy: "#750D37",
   plum: "#210124",
-  mint: "#e6f3ef",
+  mint: "#E5FCF5",
   lavender: "#D6D3EA",
   lilac: "#C6B9CD",
   sage: "#B4DDC0",
   white: "#FEFFFE",
 };
+
+/* ─── TODO: Replace with your real Cal.com / Calendly link ── */
+const BOOKING_URL = "https://cal.com/ruvah/discovery";
 
 /* ─── Reusable scroll-reveal wrapper ─────────────────────── */
 function Reveal({ children, delay = 0, y = 44, x = 0, style = {} }) {
@@ -94,16 +98,18 @@ function Btn({ children, href = "#", variant = "primary", style = {} }) {
   const variants = {
     primary: { background: C.burgundy, color: C.mint, border: "none" },
     outline: { background: "transparent", color: C.burgundy, border: `1.5px solid ${C.burgundy}` },
-    "outline-light": { background: "transparent", color: C.mint, border: `1.5px solid rgba(230,243,239,0.35)` },
-    ghost: { background: "rgba(230,243,239,0.06)", color: C.mint, border: "1.5px solid rgba(230,243,239,0.18)" },
+    "outline-light": { background: "transparent", color: C.mint, border: `1.5px solid rgba(229,252,245,0.35)` },
+    ghost: { background: "rgba(229,252,245,0.06)", color: C.mint, border: "1.5px solid rgba(229,252,245,0.18)" },
   };
+
+  const isExternal = href.startsWith("http");
 
   return (
     <motion.a
       ref={ref}
       href={href}
-      target={href.startsWith("http") ? "_blank" : "_self"}
-      rel="noreferrer"
+      target={isExternal ? "_blank" : "_self"}
+      rel={isExternal ? "noreferrer" : undefined}
       style={{ x: sx, y: sy, display: "inline-flex", alignItems: "center", gap: "6px",
         padding: "12px 26px", borderRadius: "100px", fontSize: "13px",
         fontFamily: "'DM Sans', sans-serif", fontWeight: 500, letterSpacing: "0.01em",
@@ -150,7 +156,7 @@ function Nav() {
         const el = document.getElementById(id);
         if (el) { const r = el.getBoundingClientRect(); if (r.top <= 80 && r.bottom >= 80) isDark = true; }
       });
-      ["about", "services", "founders", "hero-section"].forEach((id) => {
+      ["about", "services", "founders", "hero-section", "vision", "work-models", "industries", "case-study"].forEach((id) => {
         const el = document.getElementById(id);
         if (el) { const r = el.getBoundingClientRect(); if (r.top <= 80 && r.bottom >= 80) isDark = false; }
       });
@@ -172,7 +178,7 @@ function Nav() {
       style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         padding: "16px 48px", display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: scrolled ? (dark ? "rgba(33,1,36,0.92)" : "rgba(230,243,239,0.92)") : (mobileOpen ? (dark ? "rgba(33,1,36,0.97)" : "rgba(230,243,239,0.97)") : "transparent"),
+        background: scrolled ? (dark ? "rgba(33,1,36,0.92)" : `rgba(229,252,245,0.92)`) : (mobileOpen ? (dark ? "rgba(33,1,36,0.97)" : `rgba(229,252,245,0.97)`) : "transparent"),
         backdropFilter: (scrolled || mobileOpen) ? "blur(24px)" : "none",
         borderBottom: scrolled ? `1px solid rgba(117,13,55,${dark ? "0.18" : "0.07"})` : "none",
         transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease",
@@ -198,14 +204,14 @@ function Nav() {
             key={l}
             href={`#${l.toLowerCase()}`}
             style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px",
-              color: dark ? "rgba(230,243,239,0.72)" : "rgba(33,1,36,0.58)", textDecoration: "none" }}
+              color: dark ? "rgba(229,252,245,0.72)" : "rgba(33,1,36,0.58)", textDecoration: "none" }}
             whileHover={{ color: dark ? C.white : C.plum }}
             transition={{ duration: 0.18 }}
           >
             {l}
           </motion.a>
         ))}
-        <Btn href="mailto:ruvah.work@outlook.com">Book a Call</Btn>
+        <Btn href={BOOKING_URL}>Book a Call</Btn>
       </div>
 
       {/* Hamburger button — mobile only */}
@@ -249,7 +255,7 @@ function Nav() {
             transition={{ duration: 0.25, ease: "easeOut" }}
             style={{
               position: "absolute", top: "100%", left: 0, right: 0,
-              background: dark ? "rgba(33,1,36,0.97)" : "rgba(230,243,239,0.97)",
+              background: dark ? "rgba(33,1,36,0.97)" : `rgba(229,252,245,0.97)`,
               backdropFilter: "blur(24px)",
               borderBottom: `1px solid rgba(117,13,55,0.12)`,
               padding: "16px 24px 24px",
@@ -262,7 +268,7 @@ function Nav() {
                 href={`#${l.toLowerCase()}`}
                 onClick={handleNavClick}
                 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", fontWeight: 500,
-                  color: dark ? "rgba(230,243,239,0.82)" : "rgba(33,1,36,0.72)",
+                  color: dark ? "rgba(229,252,245,0.82)" : "rgba(33,1,36,0.72)",
                   textDecoration: "none", padding: "14px 0",
                   borderBottom: `1px solid rgba(117,13,55,0.08)` }}
               >
@@ -270,7 +276,7 @@ function Nav() {
               </a>
             ))}
             <div style={{ marginTop: "20px" }}>
-              <Btn href="mailto:ruvah.work@outlook.com" style={{ width: "100%", justifyContent: "center" }}>Book a Call</Btn>
+              <Btn href={BOOKING_URL} style={{ width: "100%", justifyContent: "center" }}>Book a Call</Btn>
             </div>
           </motion.div>
         )}
@@ -386,7 +392,7 @@ function Hero() {
           className="home-hero__cta-row"
           style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
         >
-          <Btn href="mailto:ruvah.work@outlook.com">Book a Discovery Call</Btn>
+          <Btn href={BOOKING_URL}>Book a Discovery Call</Btn>
           <Btn variant="outline" href="#services">See What We Do</Btn>
         </motion.div>
       </motion.div>
@@ -414,7 +420,7 @@ function Hero() {
                 <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px",
                   background: sc.accent, borderRadius: "18px 18px 0 0" }} />
                 <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", fontWeight: 600,
-                  letterSpacing: "0.16em", color: "rgba(230,243,239,0.9)", marginBottom: "14px", textTransform: "uppercase" }}>
+                  letterSpacing: "0.16em", color: "rgba(229,252,245,0.9)", marginBottom: "14px", textTransform: "uppercase" }}>
                   {sc.eyebrow}
                 </div>
                 <p style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "clamp(20px,2.2vw,26px)",
@@ -425,7 +431,7 @@ function Hero() {
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                   {sc.tags.map((t) => (
                     <span key={t} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px",
-                      fontWeight: 500, color: "rgba(230,243,239,0.9)", padding: "4px 12px",
+                      fontWeight: 500, color: "rgba(229,252,245,0.9)", padding: "4px 12px",
                       background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", 
                       borderRadius: "100px" }}>
                       {t}
@@ -489,7 +495,7 @@ function Problem() {
               key={i}
               variants={{ hidden: { opacity: 0, y: 32 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } }}
               style={{ display: "flex", alignItems: "flex-start", gap: "28px",
-                padding: "28px 0", borderTop: "1px solid rgba(230,243,239,0.08)" }}
+                padding: "28px 0", borderTop: "1px solid rgba(229,252,245,0.08)" }}
             >
               <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", fontWeight: 600,
                 color: C.burgundy, letterSpacing: "0.1em", paddingTop: "4px", minWidth: "20px", flexShrink: 0 }}>
@@ -572,6 +578,66 @@ function About() {
   );
 }
 
+/* ─── Vision, Mission & Values (NEW — from deck slide 8) ── */
+function VisionMissionValues() {
+  const cards = [
+    {
+      title: "Vision",
+      body: "To become the most trusted creative-tech studio for growth-stage businesses in India, where every brand we touch becomes impossible to ignore.",
+    },
+    {
+      title: "Mission",
+      body: "We help ambitious businesses grow by combining purposeful design with intelligent technology — delivering brand identity, digital presence, and smart systems under one roof.",
+    },
+    {
+      title: "Values",
+      bullets: [
+        "Craft over quantity — we say no to average work.",
+        "Intelligence by design — tech and aesthetics are inseparable.",
+        "Partnership mindset — we grow when clients grow.",
+      ],
+    },
+  ];
+
+  return (
+    <section id="vision" className="home-section" style={{ background: C.mint, padding: "120px 56px" }}>
+      <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
+        <Eyebrow>Our Foundation</Eyebrow>
+        <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
+          fontSize: "clamp(32px,4.5vw,56px)", fontWeight: 700, color: C.plum,
+          letterSpacing: "-0.025em", lineHeight: 1.1, margin: "0 0 64px" }}>
+          <BlurText text="Vision, Mission & Values." delay={80} animateBy="words" direction="top" />
+        </h2>
+
+        <div className="home-vmv-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px" }}>
+          {cards.map((c, i) => (
+            <Reveal key={i} delay={i * 0.12}>
+              <motion.div
+                whileHover={{ y: -8, boxShadow: "0 20px 44px rgba(33,1,36,0.1)" }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                style={{ background: C.lavender, borderRadius: "16px", padding: "36px 30px", minHeight: "200px" }}
+              >
+                <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "22px",
+                  fontWeight: 700, color: C.burgundy, marginBottom: "16px" }}>{c.title}</h3>
+                {c.body && (
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", fontWeight: 400,
+                    color: C.plum, opacity: 0.75, lineHeight: 1.7, margin: 0 }}>{c.body}</p>
+                )}
+                {c.bullets && (
+                  <ul style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", fontWeight: 400,
+                    color: C.plum, opacity: 0.75, lineHeight: 1.8, margin: 0, paddingLeft: "18px" }}>
+                    {c.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                  </ul>
+                )}
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Services ────────────────────────────────────────────── */
 const SVCS = [
   { n: "Brand", tag: "Everything visual, built with purpose.",
@@ -641,15 +707,15 @@ function Services() {
               label="Brand"
               sublabel="Visual identity"
               items={[
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="brand-1" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   Logo · System
                 </span>,
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="brand-2" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   Print · Pkg
                 </span>,
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="brand-3" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   Brand Book
                 </span>
@@ -661,15 +727,15 @@ function Services() {
               label="Digital"
               sublabel="Web presence"
               items={[
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="dig-1" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   Web · UI
                 </span>,
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="dig-2" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   SEO · Data
                 </span>,
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="dig-3" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   Social
                 </span>
@@ -681,15 +747,15 @@ function Services() {
               label="Tech Systems"
               sublabel="AI & automation"
               items={[
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="tech-1" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   AI · Dev
                 </span>,
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="tech-2" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   CRM · Ops
                 </span>,
-                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
+                <span key="tech-3" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "9px",
                   color: C.plum, fontWeight: 600, textAlign: "center", padding: "4px", lineHeight: 1.4, whiteSpace: "nowrap" }}>
                   Booking
                 </span>
@@ -716,8 +782,228 @@ function Services() {
               lineHeight: 1.2, letterSpacing: "-0.02em", margin: 0, maxWidth: "520px" }}>
               "The only studio where your brand and your tech stack are built in the same room."
             </p>
-            <Btn href="mailto:ruvah.work@outlook.com">Let's Talk →</Btn>
+            <Btn href={BOOKING_URL}>Let's Talk →</Btn>
           </motion.div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Three Ways to Work With You (NEW — from deck slide 10) */
+const WORK_MODELS = [
+  {
+    title: "Full Studio",
+    subtitle: "Brand + Digital + Tech",
+    tag: "Our Best Work",
+    emphasis: true,
+    desc: "Everything built together — identity, website, and intelligent systems that all speak the same language. This is where RUVAH shines.",
+    chips: ["Brand Identity", "UI/UX", "AI Automation", "Social Design", "Booking Systems", "Website Dev"],
+  },
+  {
+    title: "Design Only",
+    subtitle: "Just the Creative Side",
+    desc: "You need brand, design, and digital communication — without the tech systems. We handle everything visual, beautifully and completely.",
+    chips: ["Brand Identity", "Logo", "Packaging", "UI/UX", "Social Media", "Publication"],
+  },
+  {
+    title: "Tech Only",
+    subtitle: "Just the Intelligent Side",
+    desc: "You already have a brand. You need tech — AI tools, automation, a website, or a system built for scale. We build it precisely.",
+    chips: ["CRM & Booking", "AI Integration", "Automation", "ML Solutions", "Full-Stack Dev"],
+  },
+];
+
+function WorkModels() {
+  return (
+    <section id="work-models" className="home-section" style={{ background: C.mint, padding: "120px 56px" }}>
+      <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
+        <Eyebrow>How We Work With You</Eyebrow>
+        <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
+          fontSize: "clamp(30px,4.5vw,52px)", fontWeight: 700, color: C.plum,
+          letterSpacing: "-0.025em", lineHeight: 1.1, margin: "0 0 16px" }}>
+          <BlurText text="You choose what you need. We deliver it completely." delay={80} animateBy="words" direction="top" />
+        </h2>
+        <Reveal delay={0.1}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", fontWeight: 300,
+            color: C.plum, opacity: 0.65, lineHeight: 1.75, margin: "0 0 56px", maxWidth: "640px" }}>
+            Our strength is Design + Tech working as one — but we understand not every business needs both. We're built to serve you either way.
+          </p>
+        </Reveal>
+
+        <div className="home-work-models-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px" }}>
+          {WORK_MODELS.map((m, i) => (
+            <Reveal key={i} delay={i * 0.12}>
+              <motion.div
+                whileHover={{ y: -6, boxShadow: "0 20px 44px rgba(33,1,36,0.1)" }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                style={{
+                  position: "relative",
+                  background: m.emphasis ? C.white : C.lavender,
+                  border: m.emphasis ? `2px solid ${C.burgundy}` : "2px solid transparent",
+                  borderRadius: "16px",
+                  padding: "36px 28px 32px",
+                }}
+              >
+                {m.tag && (
+                  <span style={{
+                    position: "absolute", top: "-12px", left: "18px",
+                    background: C.burgundy, color: C.mint, borderRadius: "999px",
+                    padding: "3px 12px", fontSize: "11px", fontWeight: 700, letterSpacing: "0.02em",
+                  }}>{m.tag}</span>
+                )}
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", fontWeight: 600,
+                  color: C.plum, opacity: 0.45, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 4px" }}>
+                  {m.title}
+                </p>
+                <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "20px",
+                  fontWeight: 700, color: C.plum, margin: "0 0 14px" }}>{m.subtitle}</h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", fontWeight: 400,
+                  color: C.plum, opacity: 0.65, lineHeight: 1.65, margin: "0 0 20px" }}>{m.desc}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                  {m.chips.map((c) => (
+                    <span key={c} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", fontWeight: 500,
+                      color: C.burgundy, padding: "3px 10px", border: `1px solid ${C.burgundy}`,
+                      borderRadius: "100px", opacity: 0.72 }}>{c}</span>
+                  ))}
+                </div>
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.3}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", fontWeight: 700,
+            color: C.burgundy, textAlign: "center", margin: "48px 0 0" }}>
+            Whether it's brand alone, tech alone, or both — RUVAH delivers with the same depth, the same standard, and the same partnership mindset. No half-measures.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Who We Work With + "You're a Fit If" (NEW — deck slide 12) */
+const INDUSTRIES = [
+  "Cafes & restaurants", "Hotels & hostels", "Gyms & fitness",
+  "Local fashion brands", "Student startups", "Real estate agencies",
+  "Cloud kitchens", "B2C brands",
+];
+
+function WhoWeWorkWith() {
+  return (
+    <section id="industries" className="home-section" style={{ background: C.mint, padding: "120px 56px" }}>
+      <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
+        <Eyebrow>Who We Work With</Eyebrow>
+        <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
+          fontSize: "clamp(30px,4.5vw,52px)", fontWeight: 700, color: C.plum,
+          letterSpacing: "-0.025em", lineHeight: 1.1, margin: "0 0 16px" }}>
+          <BlurText text="Built for businesses that want to grow — not just look good." delay={80} animateBy="words" direction="top" />
+        </h2>
+        <Reveal delay={0.1}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", fontWeight: 300,
+            color: C.plum, opacity: 0.65, lineHeight: 1.75, margin: "0 0 56px", maxWidth: "680px" }}>
+            We work best with hospitality brands, lifestyle businesses, and growth-stage startups who are serious about their identity and their systems.
+          </p>
+        </Reveal>
+
+        <div className="home-who-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+          <Reveal delay={0.1}>
+            <motion.div
+              whileHover={{ y: -5, boxShadow: "0 18px 40px rgba(33,1,36,0.1)" }}
+              transition={{ type: "spring", stiffness: 280, damping: 22 }}
+              style={{ background: C.lavender, borderRadius: "16px", padding: "36px 30px" }}
+            >
+              <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "20px",
+                fontWeight: 700, color: C.plum, margin: "0 0 18px" }}>Industries We Serve</h3>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                {INDUSTRIES.map((ind) => (
+                  <span key={ind} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", fontWeight: 500,
+                    color: C.plum, padding: "5px 14px", background: "rgba(33,1,36,0.06)",
+                    borderRadius: "100px" }}>{ind}</span>
+                ))}
+              </div>
+            </motion.div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <motion.div
+              whileHover={{ y: -5, boxShadow: "0 18px 40px rgba(33,1,36,0.1)" }}
+              transition={{ type: "spring", stiffness: 280, damping: 22 }}
+              style={{ background: C.sage, borderRadius: "16px", padding: "36px 30px" }}
+            >
+              <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "20px",
+                fontWeight: 700, color: C.burgundy, margin: "0 0 18px" }}>You're a Fit If</h3>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", fontWeight: 400,
+                color: C.plum, lineHeight: 1.7, margin: 0 }}>
+                You're tired of looking smaller than you are. You want brand, website, and tech — but you don't want to manage three different vendors. You're ready to invest in building something that lasts.
+              </p>
+            </motion.div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Restaurant Case Study (NEW — from deck slide 14) ───── */
+const CASE_DELIVERABLES = [
+  "Complete brand identity — logo, colors, typography, brand guidelines",
+  "Menu design — print + digital QR version",
+  "Website — designed, built, and live with SEO basics",
+  "Instagram profile setup with 12 content templates",
+  "Online reservation system integrated into the website",
+  "WhatsApp automation for booking confirmations and review requests",
+];
+
+function CaseStudySection() {
+  return (
+    <section id="case-study" className="home-section" style={{ background: C.mint, padding: "120px 56px" }}>
+      <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
+        <Eyebrow>Sample Project</Eyebrow>
+        <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
+          fontSize: "clamp(30px,4.5vw,52px)", fontWeight: 700, color: C.plum,
+          letterSpacing: "-0.025em", lineHeight: 1.1, margin: "0 0 16px" }}>
+          <BlurText text="What a full Ruvah project looks like." delay={80} animateBy="words" direction="top" />
+        </h2>
+        <Reveal delay={0.1}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", fontWeight: 300,
+            color: C.plum, opacity: 0.65, lineHeight: 1.75, margin: "0 0 48px", maxWidth: "640px" }}>
+            Example: a restaurant in Pune comes to us wanting to grow their dine-in and online orders.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <motion.div
+            whileHover={{ y: -5, boxShadow: "0 20px 48px rgba(33,1,36,0.08)" }}
+            transition={{ type: "spring", stiffness: 280, damping: 22 }}
+            style={{ background: C.sage, borderRadius: "16px", padding: "40px 36px" }}
+          >
+            <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "22px",
+              fontWeight: 700, color: C.plum, margin: "0 0 24px" }}>What We Deliver</h3>
+            <div style={{ display: "grid", gap: "14px" }}>
+              {CASE_DELIVERABLES.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
+                  style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}
+                >
+                  <FaCheck style={{ color: C.burgundy, marginTop: "4px", flexShrink: 0, fontSize: "14px" }} />
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", fontWeight: 400,
+                    color: C.plum, lineHeight: 1.6 }}>{item}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </Reveal>
+
+        <Reveal delay={0.3}>
+          <div style={{ textAlign: "center", marginTop: "48px" }}>
+            <Btn href={BOOKING_URL}>Want This for Your Business? →</Btn>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -792,6 +1078,7 @@ const FOUNDER_ITEMS = [
     borderColor: C.burgundy,
     gradient: `linear-gradient(160deg, rgba(117,13,55,0.85) 0%, ${C.plum} 100%)`,
     url: "https://kashishoswal.netlify.app/",
+    description: "Brand identity, packaging, UI/UX, publication, social media, digital communication, menus, brochures, website design. Everything visual, built with purpose.",
   },
   {
     image: "/assets/prathamesh.png",
@@ -801,6 +1088,7 @@ const FOUNDER_ITEMS = [
     borderColor: C.sage,
     gradient: `linear-gradient(160deg, rgba(33,1,36,0.9) 0%, rgba(33,1,36,0.98) 100%)`,
     url: "https://prathameshfukeresume.netlify.app/",
+    description: "AI engineering, machine learning, full-stack development, software architecture, automation systems, booking & CRM integrations. Everything intelligent, built to scale.",
   },
 ];
 
@@ -820,7 +1108,7 @@ function Founders() {
 
         {/* ChromaGrid */}
         <Reveal delay={0.1}>
-          <div className="home-founders-chroma" style={{ height: "520px", position: "relative" }}>
+          <div className="home-founders-chroma" style={{ minHeight: "560px", height: "auto", position: "relative" }}>
             <ChromaGrid
               items={FOUNDER_ITEMS}
               columns={2}
@@ -829,6 +1117,31 @@ function Founders() {
               damping={0.42}
               fadeOut={0.55}
             />
+          </div>
+        </Reveal>
+
+        {/* Founder descriptions — added per deck content */}
+        <Reveal delay={0.2}>
+          <div className="home-founders-desc-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginTop: "40px" }}>
+            {FOUNDER_ITEMS.map((f, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -4, boxShadow: "0 16px 36px rgba(33,1,36,0.08)" }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                style={{ background: C.lilac, borderRadius: "14px", padding: "28px 24px" }}
+              >
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", fontWeight: 700,
+                  color: C.burgundy, letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 6px" }}>
+                  {f.subtitle}
+                </p>
+                <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "20px",
+                  fontWeight: 700, color: C.plum, margin: "0 0 12px" }}>{f.title}</h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", fontWeight: 400,
+                  color: C.plum, opacity: 0.72, lineHeight: 1.7, margin: 0 }}>
+                  {f.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </Reveal>
 
@@ -864,7 +1177,6 @@ function Contact() {
       <div style={{ maxWidth: "640px", margin: "0 auto", position: "relative" }}>
         <Eyebrow color={C.sage}>Get In Touch</Eyebrow>
 
-        {/* ── Fixed contrast: use sage for "that thinks." on plum bg ── */}
         <h2 style={{ fontFamily: "'Bricolage Grotesque', sans-serif",
           fontSize: "clamp(44px,7vw,88px)", fontWeight: 800, color: C.white,
           letterSpacing: "-0.03em", lineHeight: 1.0, margin: "0 0 24px" }}>
@@ -896,7 +1208,7 @@ function Contact() {
 
         <Reveal delay={0.42}>
           <div className="home-contact__cta-row" style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginBottom: "32px" }}>
-            <Btn href="mailto:ruvah.work@outlook.com">Book a Discovery Call</Btn>
+            <Btn href={BOOKING_URL}>Book a Discovery Call</Btn>
             <Btn variant="ghost" href="mailto:ruvah.work@outlook.com">ruvah.work@outlook.com</Btn>
           </div>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", color: C.white,
@@ -912,7 +1224,7 @@ function Contact() {
 /* ─── Footer ──────────────────────────────────────────────── */
 function SiteFooter() {
   return (
-    <footer className="home-footer" style={{ background: C.plum, borderTop: "1px solid rgba(230,243,239,0.05)",
+    <footer className="home-footer" style={{ background: C.plum, borderTop: "1px solid rgba(229,252,245,0.05)",
       padding: "28px 56px", display: "flex", alignItems: "center",
       justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
       <img src="/assets/ruvah_without_bg.png" alt="Ruvah"
@@ -923,16 +1235,16 @@ function SiteFooter() {
             key={l}
             href={`#${l.toLowerCase()}`}
             style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px",
-              color: "rgba(230,243,239,0.38)", textDecoration: "none" }}
-            whileHover={{ color: "rgba(230,243,239,0.72)" }}
+              color: "rgba(229,252,245,0.38)", textDecoration: "none" }}
+            whileHover={{ color: "rgba(229,252,245,0.72)" }}
             transition={{ duration: 0.2 }}
           >
             {l}
           </motion.a>
         ))}
       </div>
-      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", color: "rgba(230,243,239,0.22)" }}>
-        © 2026 Ruvah. Brands that think.
+      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", color: "rgba(229,252,245,0.22)" }}>
+        © {new Date().getFullYear()} Ruvah. Brands that think.
       </span>
     </footer>
   );
@@ -946,7 +1258,11 @@ export default function Home() {
       <Hero />
       <Problem />
       <About />
+      <VisionMissionValues />
       <Services />
+      <WorkModels />
+      <WhoWeWorkWith />
+      <CaseStudySection />
       <Process />
       <Founders />
       <Contact />

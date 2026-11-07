@@ -10,7 +10,7 @@ const founders = [
     image: '/assets/kashish.png',
     link: 'https://kashishoswal.netlify.app/',
     skills:
-      'Brand identity, packaging, UI/UX, publication, social media, digital communication, menus, brochures, website design.',
+      'Brand identity, packaging, UI/UX, publication, social media, digital communication, menus, brochures, website design. Everything visual, built with purpose.',
   },
   {
     name: 'Prathamesh Fuke',
@@ -18,7 +18,7 @@ const founders = [
     image: '/assets/prathamesh.png',
     link: 'https://prathameshfukeresume.netlify.app/',
     skills:
-      'AI engineering, machine learning, full-stack development, software architecture, automation systems, booking & CRM integrations.',
+      'AI engineering, machine learning, full-stack development, software architecture, automation systems, booking & CRM integrations. Everything intelligent, built to scale.',
   },
 ]
 

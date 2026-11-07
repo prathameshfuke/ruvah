@@ -30,7 +30,7 @@ function Footer() {
           <a href="mailto:ruvah.work@outlook.com">ruvah.work@outlook.com</a>
           <p>Based in Pune, India.</p>
         </div>
-        <p className="site-footer__copy">© 2026 Ruvah. Brands that think.</p>
+        <p className="site-footer__copy">© {new Date().getFullYear()} Ruvah. Brands that think.</p>
       </div>
     </footer>
   )

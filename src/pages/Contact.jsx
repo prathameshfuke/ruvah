@@ -2,6 +2,9 @@ import { motion } from 'framer-motion'
 import { Button } from '../components/Button'
 import { revealContainer, revealItem } from '../utils/motion'
 
+/* ─── TODO: Replace with your real Cal.com / Calendly link ─── */
+const BOOKING_URL = 'https://cal.com/ruvah/discovery'
+
 function Contact() {
   return (
     <div className="page page--mint">
@@ -17,8 +20,8 @@ function Contact() {
             <motion.p className="body-copy" variants={revealItem}>
               Based in Pune, India. Working with clients everywhere.
             </motion.p>
-            <motion.div variants={revealItem}>
-              <Button href="mailto:ruvah.work@outlook.com?subject=30-Minute%20Discovery%20Call" variant="primary">
+            <motion.div variants={revealItem} className="cta-actions">
+              <Button href={BOOKING_URL} target="_blank" rel="noreferrer" variant="primary">
                 Book a 30-Minute Discovery Call
               </Button>
             </motion.div>
@@ -26,8 +29,15 @@ function Contact() {
               No commitment, no brief needed — just a conversation about your business and what you want to build.
             </motion.p>
           </motion.div>
+          {/* Cal.com / Calendly inline embed — replace the src below with your real embed URL */}
           <motion.div className="schedule-card" initial="hidden" whileInView="visible" variants={revealItem} viewport={{ once: true }}>
-            <p>Scheduling embed placeholder (Calendly or equivalent)</p>
+            <p style={{ fontWeight: 600, marginBottom: '0.6rem' }}>📅 Pick a time that works for you</p>
+            <p style={{ fontSize: '0.9rem', opacity: 0.7 }}>
+              Click the button above to open our scheduling page, or{' '}
+              <a href={BOOKING_URL} target="_blank" rel="noreferrer" style={{ color: 'var(--color-burgundy)', textDecoration: 'underline' }}>
+                book directly here
+              </a>.
+            </p>
           </motion.div>
         </div>
       </section>

@@ -3,12 +3,12 @@ import { FaCheck } from 'react-icons/fa6'
 import { revealContainer, revealItem, inViewViewport } from '../utils/motion'
 
 const deliverables = [
-  'Complete brand identity',
-  'Menu design',
-  'Website with SEO basics',
-  'Instagram setup with 12 content templates',
-  'Online reservation system',
-  'WhatsApp automation',
+  'Complete brand identity — logo, colors, typography, brand guidelines',
+  'Menu design — print + digital QR version',
+  'Website — designed, built, and live with SEO basics',
+  'Instagram profile setup with 12 content templates',
+  'Online reservation system integrated into the website',
+  'WhatsApp automation for booking confirmations and review requests',
 ]
 
 const galleryImages = Array.from({ length: 17 }, (_, index) => {

@@ -4,15 +4,15 @@ import { revealContainer, revealItem, inViewViewport } from '../utils/motion'
 const comparisons = [
   {
     title: 'vs. Design agencies',
-    copy: 'Strong visuals, weak implementation. We pair identity with the systems required to execute and scale.',
+    copy: 'They give you a logo. We give you a logo and the system to back it up.',
   },
   {
     title: 'vs. Dev shops',
-    copy: 'Stable software, weak perception. We build technical depth without sacrificing brand clarity and customer trust.',
+    copy: 'They build your app. We make sure it looks and feels premium doing it.',
   },
   {
     title: 'vs. Big agencies',
-    copy: 'Big teams, layered handoffs. We stay senior, close, and accountable with direct founder-led execution.',
+    copy: "They're slow and built for corporates. We're nimble and built for growth.",
   },
 ]
 

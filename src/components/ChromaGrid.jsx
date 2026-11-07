@@ -89,6 +89,7 @@ export const ChromaGrid = ({
             {c.handle && <span className="handle">{c.handle}</span>}
             <p className="role">{c.subtitle}</p>
             {c.location && <span className="location">{c.location}</span>}
+            {c.description && <p className="desc">{c.description}</p>}
           </footer>
         </article>
       ))}
