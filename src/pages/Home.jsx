@@ -27,7 +27,7 @@ const C = {
 };
 
 /* ─── TODO: Replace with your real Cal.com / Calendly link ── */
-const BOOKING_URL = "https://cal.com/ruvah/discovery";
+const BOOKING_URL = "https://cal.com/ruvah";
 
 /* ─── Reusable scroll-reveal wrapper ─────────────────────── */
 function Reveal({ children, delay = 0, y = 44, x = 0, style = {} }) {
@@ -611,11 +611,11 @@ function VisionMissionValues() {
 
         <div className="home-vmv-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px" }}>
           {cards.map((c, i) => (
-            <Reveal key={i} delay={i * 0.12}>
+            <Reveal key={i} delay={i * 0.12} style={{ height: "100%" }}>
               <motion.div
                 whileHover={{ y: -8, boxShadow: "0 20px 44px rgba(33,1,36,0.1)" }}
                 transition={{ type: "spring", stiffness: 280, damping: 22 }}
-                style={{ background: C.lavender, borderRadius: "16px", padding: "36px 30px", minHeight: "200px" }}
+                style={{ background: C.lavender, borderRadius: "16px", padding: "36px 30px", minHeight: "200px", height: "100%", boxSizing: "border-box" }}
               >
                 <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "22px",
                   fontWeight: 700, color: C.burgundy, marginBottom: "16px" }}>{c.title}</h3>
@@ -833,7 +833,7 @@ function WorkModels() {
 
         <div className="home-work-models-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "16px" }}>
           {WORK_MODELS.map((m, i) => (
-            <Reveal key={i} delay={i * 0.12}>
+            <Reveal key={i} delay={i * 0.12} style={{ height: "100%" }}>
               <motion.div
                 whileHover={{ y: -6, boxShadow: "0 20px 44px rgba(33,1,36,0.1)" }}
                 transition={{ type: "spring", stiffness: 280, damping: 22 }}
@@ -842,7 +842,7 @@ function WorkModels() {
                   background: m.emphasis ? C.white : C.lavender,
                   border: m.emphasis ? `2px solid ${C.burgundy}` : "2px solid transparent",
                   borderRadius: "16px",
-                  padding: "36px 28px 32px",
+                  padding: "36px 28px 32px", height: "100%", boxSizing: "border-box",
                 }}
               >
                 {m.tag && (
@@ -874,8 +874,8 @@ function WorkModels() {
 
         <Reveal delay={0.3}>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", fontWeight: 700,
-            color: C.burgundy, textAlign: "center", margin: "48px 0 0" }}>
-            Whether it's brand alone, tech alone, or both — RUVAH delivers with the same depth, the same standard, and the same partnership mindset. No half-measures.
+            color: C.burgundy, textAlign: "center", margin: "48px 0 0", overflowWrap: "break-word" }}>
+            Whether it's brand alone, tech alone, or both — RUVAH delivers with the same depth, the same standard, and the same partnership mindset.<br />No half-measures.
           </p>
         </Reveal>
       </div>
@@ -908,11 +908,11 @@ function WhoWeWorkWith() {
         </Reveal>
 
         <div className="home-who-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} style={{ height: "100%" }}>
             <motion.div
               whileHover={{ y: -5, boxShadow: "0 18px 40px rgba(33,1,36,0.1)" }}
               transition={{ type: "spring", stiffness: 280, damping: 22 }}
-              style={{ background: C.lavender, borderRadius: "16px", padding: "36px 30px" }}
+              style={{ background: C.lavender, borderRadius: "16px", padding: "36px 30px", height: "100%", boxSizing: "border-box" }}
             >
               <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "20px",
                 fontWeight: 700, color: C.plum, margin: "0 0 18px" }}>Industries We Serve</h3>
@@ -926,11 +926,11 @@ function WhoWeWorkWith() {
             </motion.div>
           </Reveal>
 
-          <Reveal delay={0.2}>
+          <Reveal delay={0.2} style={{ height: "100%" }}>
             <motion.div
               whileHover={{ y: -5, boxShadow: "0 18px 40px rgba(33,1,36,0.1)" }}
               transition={{ type: "spring", stiffness: 280, damping: 22 }}
-              style={{ background: C.sage, borderRadius: "16px", padding: "36px 30px" }}
+              style={{ background: C.sage, borderRadius: "16px", padding: "36px 30px", height: "100%", boxSizing: "border-box" }}
             >
               <h3 style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "20px",
                 fontWeight: 700, color: C.burgundy, margin: "0 0 18px" }}>You're a Fit If</h3>
@@ -1209,7 +1209,7 @@ function Contact() {
         <Reveal delay={0.42}>
           <div className="home-contact__cta-row" style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginBottom: "32px" }}>
             <Btn href={BOOKING_URL}>Book a Discovery Call</Btn>
-            <Btn variant="ghost" href="mailto:ruvah.work@outlook.com">ruvah.work@outlook.com</Btn>
+            <Btn variant="ghost" href="mailto:ruvah.work@gmail.com">ruvah.work@gmail.com</Btn>
           </div>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", color: C.white,
             opacity: 0.32, letterSpacing: "0.08em" }}>

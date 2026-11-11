@@ -106,7 +106,7 @@ function Services() {
             </motion.div>
             <motion.p className="closing-line" variants={revealItem}>
               Whether it&apos;s brand alone, tech alone, or both — RUVAH delivers with the same depth, the same
-              standard, and the same partnership mindset. No half-measures.
+              standard, and the same partnership mindset.<br />No half-measures.
             </motion.p>
           </motion.div>
         </div>

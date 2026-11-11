@@ -3,7 +3,7 @@ import { Button } from '../components/Button'
 import { revealContainer, revealItem } from '../utils/motion'
 
 /* ─── TODO: Replace with your real Cal.com / Calendly link ─── */
-const BOOKING_URL = 'https://cal.com/ruvah/discovery'
+const BOOKING_URL = 'https://cal.com/ruvah'
 
 function Contact() {
   return (
@@ -14,8 +14,8 @@ function Contact() {
             <motion.h1 className="display display--burgundy" variants={revealItem}>
               LET&apos;S BUILD SOMETHING THAT THINKS.
             </motion.h1>
-            <motion.a className="contact-email" href="mailto:ruvah.work@outlook.com" variants={revealItem}>
-              ruvah.work@outlook.com
+            <motion.a className="contact-email" href="mailto:ruvah.work@gmail.com" variants={revealItem}>
+              ruvah.work@gmail.com
             </motion.a>
             <motion.p className="body-copy" variants={revealItem}>
               Based in Pune, India. Working with clients everywhere.

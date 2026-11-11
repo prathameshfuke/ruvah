@@ -27,7 +27,7 @@ function Footer() {
           </nav>
         </div>
         <div className="site-footer__meta">
-          <a href="mailto:ruvah.work@outlook.com">ruvah.work@outlook.com</a>
+          <a href="mailto:ruvah.work@gmail.com">ruvah.work@gmail.com</a>
           <p>Based in Pune, India.</p>
         </div>
         <p className="site-footer__copy">© {new Date().getFullYear()} Ruvah. Brands that think.</p>
